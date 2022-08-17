@@ -1,17 +1,10 @@
 <template>
   <div>
     <div class="upload-title">
-    <!-- <el-card> -->
-      <!--<div slot="header" class="clearfix">
-            <span>选择文件夹</span>
-        </div>-->
       <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
         <el-breadcrumb-item>ABC项目</el-breadcrumb-item>
-        <!--<el-breadcrumb-item>活动列表</el-breadcrumb-item>
-            <el-breadcrumb-item>活动详情</el-breadcrumb-item>-->
       </el-breadcrumb>
-    <!-- </el-card> -->
     </div>
       <el-card>
         <el-form
@@ -36,6 +29,7 @@
                   :on-change="onUploadChange"
                   multiple
                   :limit="3"
+                   :show-file-list="false"
                   :on-exceed="handleExceed"
                   >
                   <el-button
@@ -45,14 +39,13 @@
                         
                 >上传</el-button>
                   <div slot="tip" class="el-upload__tip">可上传文件格式：*.txt, *.pdf, *.doc, *.docx, *.xls, *.xlsx</div>
+                  <div>
 
-                <div slot="file" slot-scope="{file}">
-        
-                </div>
+                  </div>
                 </el-upload>
               </div>
               <div class="upload-newWork">
-                <el-button type="primary" size="small" @click="addFolder"  >新建文件夹</el-button>
+                <el-button type="primary" size="small" @click="addFolder">新建文件夹</el-button>
               </div>
             </div>
           </el-card>
@@ -87,29 +80,7 @@
               src="../img/Icon/folder.png"
             />
             <template v-else-if="(scope.row.type = 'doc')">
-              <img
-                class="icon-file"
-                v-if="scope.row.extName == 'docx' || scope.row.extName == 'doc'"
-                src="../img/Icon/word.png"
-              />
-              <img
-                class="icon-file"
-                v-else-if="
-                  scope.row.extName == 'xlsx' || scope.row.extName == 'xls'
-                "
-                src="../img/Icon/excel.png"
-              />
-              <img
-                class="icon-file"
-                v-else-if="scope.row.extName == 'pdf'"
-                src="../img/Icon/pdf.png"
-              />
-              <img
-                class="icon-file"
-                v-else-if="scope.row.extName == 'txt'"
-                src="../img/Icon/txt.png"
-              />
-              <img class="icon-file" v-else src="../img/Icon/unknown.png" />
+              <img  class="icon-file" v-if="getFileType(scope.row.extName)" :src="getFileType(scope.row.extName)"/>
             </template>
             <img class="icon-file" v-else src="../img/Icon/unknown.png" />
                 <a v-show="!scope.row.isModifiedRow" style="color: black; margin-left: 10px" @click="ViewForFile">{{scope.row.name}}</a>
@@ -166,6 +137,7 @@ module.exports = {
         {
           ID: 1,
           type: "folder",
+          src: '',
           name: "ABC项目",
           parent: "folder_user_001",
           createDate: "2022-7-20 20:00",
@@ -302,8 +274,31 @@ module.exports = {
     }
     //用于数据初始化
     document.title = "新增文档";
-    //this.getRoleData();
     this.keyupAnno();
+  },
+  computed: {
+    getFileType() {
+     return function(type) {
+        let url = '';
+        switch(type) {
+          case 'folder': url=  "../img/Icon/folder.png"
+            break;
+          case 'docx' || 'doc': url = "../img/Icon/word.png"
+            break;
+          case 'xlsx': url =  "../img/Icon/excel.png"
+            break;
+          case 'xls': url =  "../img/Icon/excel.png"
+            break;
+          case 'pdf': url =  "../img/Icon/pdf.png"
+            break;
+          case 'txt':  url = "../img/Icon/txt.png"
+            break;
+          default : url = "../img/Icon/unknown.png"
+
+        }
+        return url;
+      }
+    }
   },
   methods: {
     onbeforeUpload: function (file) {
@@ -360,9 +355,6 @@ module.exports = {
       console.log(this.formData);
     },
     onUpload: function (file) {
-      //let formData = new FormData()
-      //formData.append('file', file.file)
-      debugger;
       let upFile = file.file;
       this.formData.file = upFile;
       this.formData.DocName = upFile.name;
@@ -370,17 +362,9 @@ module.exports = {
       this.formData.Size = upFile.size;
       console.log(this.formData.DocName);
       console.log(this.formData.ExtName);
-      //this.postUpload(formData).then((res) => {
-      //    console.log(res)
-      //    this.$message.success(this.$t('UPLOAD_SUCCESS'))
-      //}).catch((e) => {
-      //    this.$message.error(e.message)
-      //})
     },
-    // submitUpload: function () {
-    // },
+
     addFolder: function () {
-      //this.$message("执行文件夹创建");
       this.currentFolderData.unshift({
         ID: 0,
         type: "folder",
