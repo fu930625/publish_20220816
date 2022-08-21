@@ -31,13 +31,13 @@
                     <div class="search-hot">
                         <div>热门搜索 <a>></a></div>
                         <ul v-for="(item,index) in hotList">
-                          <span key="id" class="search-li" @click="handleClickUrl(item)">{{index+1}}  {{item.name}}</a></span>
+                          <span key="id" class="search-li" @click="handleClickUrl(item)"><a  class="search-a" >{{index+1}}  {{item.name}}</a></span>
                         </ul>
                     </div>
                     <div class="search-history">
                       <div>历史搜索 <a>></a></div>
                       <ul v-for="(item,index) in hotList">
-                        <span key="id" class="search-li">{{index+1}}<a  class="search-a" href="https://www.baidu.com/" target="_blank">{{item.name}}</a></span>
+                        <span key="id" class="search-li" @click="handleClickUrl(item)"><a  class="search-a" >{{index+1}}  {{item.name}}</a></span>
                       </ul>
                     </div>
               </div>
@@ -138,6 +138,10 @@
       background: none;
       text-decoration: none;
       color:black
+    }
+    .search-li :hover {
+      cursor:pointer;
+      color:#409EFF
     }
 </style>
 </html>
