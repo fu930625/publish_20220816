@@ -9,7 +9,6 @@ function Init() {
     vm = new Vue({
         el: '#search',
         data: {
-          activeName: 'KnowledgeSer',
           input: '',
           options: [{
             value: '选项1',
@@ -135,9 +134,6 @@ function Init() {
           ],
 
         }, methods: {
-          handleClick(tab, event) {
-            console.log(tab, event);
-          },
           handleClickUrl(item) {
             // window.open(item.href, '_blank')
             window.location.href = item.url
