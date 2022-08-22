@@ -29,6 +29,13 @@
                     </p>
                   </li>
                 </ul>
+                <div class="block" style="text-align:center">
+                  <el-pagination @size-change="handleSizeChange"
+                                 @current-change="handleCurrentChange"
+                                 layout="total, sizes, prev, pager, next, jumper"
+                                 >
+                  </el-pagination>
+              </div>
               </div>
           </div>
     </div>

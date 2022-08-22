@@ -152,6 +152,12 @@ function Init() {
             },
           ],
           red_text: '北京 博物院',
+          formData: {
+            total: 0,
+            currentPage: 1,
+            pagesize: 20,
+            pagesizes: [10, 20, 30, 40]
+          }
         }, methods: {
           handleClickUrl(item) {
             // window.open(item.href, '_blank')
@@ -188,6 +194,17 @@ function Init() {
             return str
 
           },
+
+        searchtableList() {
+
+        },
+        handleSizeChange (val) {
+            this.formData.pagesize = val;
+            // searchtableList(vm.currentPage, val);               
+        },
+        handleCurrentChange (val) {
+            // this.formData.currentPage = val;
+        },
           
         }, created: function () {
             $("#search").show();
