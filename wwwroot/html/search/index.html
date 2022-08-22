@@ -8,37 +8,42 @@
 <body>
     <div id="search" >
           <div class="search-name">
-              <div class="search-img">
-                <img src="../../img/search.png" class="search-img_png">
-              </div>
-              <div class="search-content">
-                <div class="search-left">
-                  <el-input v-model="input" placeholder="请输入内容" class="search-input"></el-input>
-                  <el-select v-model="value" placeholder="请选择" class="search-select">
-                    <el-option
-                      v-for="item in options"
-                      :key="item.value"
-                      :label="item.label"
-                      :value="item.value">
-                    </el-option>
-                  </el-select>
+            <template v-if="isSearchResult">
+                <div class="search-img">
+                  <img src="../../img/search.png" class="search-img_png">
                 </div>
-                <el-button type="primary" class="search-btn">搜索一下</el-button>
-              </div>
-              <div class="search-bottom">
-                    <div class="search-hot">
-                        <div class="search-hot_history">热门搜索 <a>></a></div>
+                <div class="search-content">
+                  <div class="search-left">
+                    <el-input v-model="input" placeholder="请输入内容" class="search-input"></el-input>
+                    <el-select v-model="value" placeholder="请选择" class="search-select">
+                      <el-option
+                        v-for="item in selectOptions"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </div>
+                  <el-button type="primary" class="search-btn" @click="handleSearch">搜索一下</el-button>
+                </div>
+                <div class="search-bottom">
+                      <div class="search-hot">
+                          <div class="search-hot_history">热门搜索 <a>></a></div>
+                          <ul v-for="(item,index) in hotList">
+                            <span key="id" class="search-li" @click="handleClickUrl(item)"><a  class="search-a" >{{index+1}}  {{item.name}}</a></span>
+                          </ul>
+                      </div>
+                      <div class="search-history">
+                        <div class="search-hot_history">历史搜索 <a>></a></div>
                         <ul v-for="(item,index) in hotList">
                           <span key="id" class="search-li" @click="handleClickUrl(item)"><a  class="search-a" >{{index+1}}  {{item.name}}</a></span>
                         </ul>
-                    </div>
-                    <div class="search-history">
-                      <div class="search-hot_history">历史搜索 <a>></a></div>
-                      <ul v-for="(item,index) in hotList">
-                        <span key="id" class="search-li" @click="handleClickUrl(item)"><a  class="search-a" >{{index+1}}  {{item.name}}</a></span>
-                      </ul>
-                    </div>
-              </div>
+                      </div>
+                </div>
+            </template>
+          </div>
+          <div>
+
           </div>
     </div>
 </body>
@@ -49,15 +54,8 @@
 <!-- 引入组件库 -->
 <script src="../../js/element-ui-index.js"></script>
 <script src="../../js/jquery.min.js"></script>
-<!-- 生产环境版本，优化了尺寸和速度 -->
-<!--<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>-->
 <!-- 引入样式 -->
-<!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-ui@2.14.0/lib/theme-chalk/index.css">-->
 <link rel="stylesheet" href="../../css/common.css">
-<!-- 引入组件库 -->
-<!--<script src="https://cdn.jsdelivr.net/npm/element-ui@2.14.0/lib/index.js"></script>-->
-
-<!--<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>-->
 <script src="../../js/base.js"></script>
 <script src="index.js"></script>
 <style  scoped lang="sass">

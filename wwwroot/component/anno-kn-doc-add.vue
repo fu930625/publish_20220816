@@ -208,6 +208,7 @@ module.exports = {
           secertLevel: 1,
           showFucArea: false,
         },
+      
       ],
       fileList: [], //上传控件的文件列表
       folderList: [], //用户的所有目录数据列表
