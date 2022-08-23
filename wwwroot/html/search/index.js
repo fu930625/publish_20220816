@@ -195,15 +195,18 @@ function Init() {
 
           },
 
-        searchtableList() {
-
+        searchResultTableList() {
+          // 请求接口
+          // this.resultList = res;
         },
-        handleSizeChange (val) {
-            this.formData.pagesize = val;
-            // searchtableList(vm.currentPage, val);               
+        handleSizeChange (v) {
+            this.formData.pagesize = v;
+            this.formData.currentPage = 1;
+            this.searchResultTableList()
         },
-        handleCurrentChange (val) {
-            // this.formData.currentPage = val;
+        handleCurrentChange (v) {
+          this.formData.currentPage = v;
+          this.searchResultTableList()
         },
           
         }, created: function () {

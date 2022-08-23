@@ -30,11 +30,17 @@
                   </li>
                 </ul>
                 <div class="block" style="text-align:center">
-                  <el-pagination @size-change="handleSizeChange"
-                                 @current-change="handleCurrentChange"
-                                 layout="total, sizes, prev, pager, next, jumper"
-                                 >
-                  </el-pagination>
+                  <el-pagination
+                      v-if="total > 0"
+                      @size-change="handleSizeChange"
+                      @current-change="handleCurrentChange"
+                      :current-page="pageNo"
+                      :page-sizes="pageSizes"
+                      :page-size="pageSize"
+                      layout=" prev, pager, next, total, sizes, jumper"
+                      :total="total"
+                  >
+              </el-pagination>
               </div>
               </div>
           </div>
