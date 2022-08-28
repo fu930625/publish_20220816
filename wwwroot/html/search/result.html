@@ -16,8 +16,8 @@
               </div>
               <div class="search-result_content">
                 <p class="seacrh-result-total">为您找到了相关结果95个</p>
-                <ul class="search-result_total" v-for="item in resultList">
-                  <li class="search-result_li">
+                <ul class="search-result_total">
+                  <li class="search-result_li"  v-for="item in resultList">
                     <h3>{{item.name}}</h3>
                     <!-- <p class="search_result_title">{{item.name}}</p> -->
                     <span v-html="searchColor(item.detail)"></span>
@@ -56,14 +56,14 @@
 <script src="../../js/base.js"></script>
 <script src="index.js"></script>
 <style scope>
-    body {
-        background-color: #f2f2f5;
-        height: 100%;
-        -moz-osx-font-smoothing: grayscale;
-        -webkit-font-smoothing: antialiased;
-        text-rendering: optimizeLegibility;
-        font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Arial,sans-serif;
-    }
+  body {
+    background-color: #f2f2f5;
+    height: 100%;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Arial,sans-serif;
+}
     #search {
       width: 100%;
       height: 100%;
@@ -114,7 +114,8 @@
       min-width: 700px;
       display: inline-block;
        border-radius: 12px;
-       padding: 8px;
+       padding: 8px 8px 0px 8px;
+       margin-bottom: 20px;
     }
     .search_result_title {
       font-size: 16px;
