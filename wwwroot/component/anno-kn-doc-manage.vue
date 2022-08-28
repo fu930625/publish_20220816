@@ -329,9 +329,7 @@
                             break;
                         case 'docx' || 'doc': url = "../img/Icon/word.png"
                             break;
-                        case 'xlsx': url = "../img/Icon/excel.png"
-                            break;
-                        case 'xls': url = "../img/Icon/excel.png"
+                        case 'xlsx' || 'xls': url = "../img/Icon/excel.png"
                             break;
                         case 'pdf': url = "../img/Icon/pdf.png"
                             break;
@@ -438,7 +436,7 @@
                             type: "folder",
                             name: f.FolderName,
                             parent: folderObj.ID,
-                            createDate: f.LastModified,
+                            createDate: that.dateFormat(f.LastModified), 
                             secertLevel: f.SecLevel,
                             showFucArea: false
                         })
@@ -454,7 +452,7 @@
                             extName: d.ExtName,
                             size: d.Size,
                             parent: folderObj.ID,
-                            createDate: d.UploadTime,
+                            createDate: that.dateFormat(d.LastModified),
                             secertLevel: d.SecLevel,
                             showFucArea: false
                         })
@@ -693,10 +691,10 @@
                 if (list.length == 0) this.$message("没有可选的文件夹");
 
                 //初始化目录树，重新生成
-                if(this.folderTreeData.length==0 || this.isModifiedState){
+                //if(this.folderTreeData.length==0 || this.isModifiedState){
                     this.folderTreeData=[];
                     this.buildTree(list, this.folderTreeData, 0);
-                }
+                //}
                 console.log("folderTreeData-->", this.folderTreeData);
                 //默认设置当前父节点选中
                 //this.$refs.tree.setCheckedKeys([row.parent]);
@@ -808,7 +806,7 @@
             //},
             rowDelete: function (row) {
                 let that = this;
-                that.$message("行删除");
+                that.$message("行回收");
                 //修改文件名称
                 let input = anno.getInput();
                 input.id = row.ID;
@@ -878,6 +876,12 @@
                 let minute = new Date().getMinutes();
 
                 return year + '-' + month + '-' + day + ' ' + hour + ':' + minute;
+            },
+            dateFormat: function (dateString) {
+                if (dateString == null) return "";
+                if (dateString.indexOf("T") > 0) dateString = dateString.replace("T", " ");
+
+                return dateString.substr(0, 16);
             },
             //postUpload: function (file) {
             //  return axios({
